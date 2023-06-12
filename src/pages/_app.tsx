@@ -4,6 +4,7 @@ import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import Head from "next/head";
+import SideNav from "@/components/SideNav";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,10 +14,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Head>
         <title>Tweetar Clone</title>
-        <meta name="description" content="this is a mini twitter clone" />
+        <meta name="description" content="A mini twitter clone!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto flex ">
+      <div className="container mx-auto flex items-start sm:pr-4">
+        <SideNav />
         <div className="min-h-screen flex-grow border-x">
           <Component {...pageProps} />
         </div>
