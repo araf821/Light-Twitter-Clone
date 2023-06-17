@@ -15,11 +15,12 @@ model Tweet {
     id        String   @id @default(uuid())
     userId    String
     content   String
-    createdAt DateTime
+    createdAt DateTime @default(now())
 
     user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     likes Like[]
 
+    @@unique([createdAt, id])
     @@index([userId])
 }
 
@@ -66,14 +67,14 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    name           String?
+    name          String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
 
-    // Non-nextauth
+    // Non-Next Auth
     tweets    Tweet[]
     likes     Like[]
     followers User[]  @relation(name: "Followers")
